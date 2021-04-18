@@ -13,5 +13,11 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.OK)
                 .build();
     }
+    @RequestMapping(value = "/")
+    public ResponseEntity<String> init(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("hello world").build();
+    }
+
 
 }
