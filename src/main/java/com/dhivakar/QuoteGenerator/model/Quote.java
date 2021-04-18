@@ -13,4 +13,11 @@ public class Quote {
     private long id;
     private String author;
     private String quote;
+    public Quote(){
+
+    }
+    public Quote(String author, String quote) {
+        this.author=author;
+        this.quote=quote;
+    }
 }
