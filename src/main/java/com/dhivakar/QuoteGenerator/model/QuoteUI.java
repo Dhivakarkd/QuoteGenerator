@@ -9,4 +9,5 @@ public class QuoteUI {
 
     private String author;
     private String quote;
+    
 }
