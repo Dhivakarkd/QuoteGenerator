@@ -20,4 +20,9 @@ public class Quote {
         this.author=author;
         this.quote=quote;
     }
+    public Quote(long id,String author, String quote) {
+        this.id=id;
+        this.author=author;
+        this.quote=quote;
+    }
 }
