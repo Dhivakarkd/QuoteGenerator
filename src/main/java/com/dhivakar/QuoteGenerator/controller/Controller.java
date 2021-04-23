@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 public class Controller {
@@ -23,8 +24,16 @@ public class Controller {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Quote> getquote(){
+    public List<Quote> getquote() {
         return service.findall();
+    }
+
+    @RequestMapping(value = "/randomQuote", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Quote getrandomquote() {
+        Random random = new Random();
+
+        return service.findbyid(random.nextInt(5000));
     }
 
 }

@@ -10,19 +10,22 @@ import javax.persistence.*;
 public class Quote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     private String author;
     private String quote;
-    public Quote(){
+
+    public Quote() {
 
     }
+
     public Quote(String author, String quote) {
-        this.author=author;
-        this.quote=quote;
+        this.author = author;
+        this.quote = quote;
     }
-    public Quote(long id,String author, String quote) {
-        this.id=id;
-        this.author=author;
-        this.quote=quote;
+
+    public Quote(int id, String author, String quote) {
+        this.id = id;
+        this.author = author;
+        this.quote = quote;
     }
 }

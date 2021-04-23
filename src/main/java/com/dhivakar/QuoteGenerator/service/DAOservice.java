@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DAOservice {
@@ -14,12 +15,20 @@ public class DAOservice {
     @Autowired
     QuoteRepository repository;
 
-    public List<Quote> findall(){
+    public List<Quote> findall() {
         Iterable<Quote> quotes = repository.findAll();
         List<Quote> quoteList = new ArrayList<>();
         for (Quote q : quotes) {
-            quoteList.add(new Quote(q.getId(),q.getAuthor(), q.getQuote()));
+            quoteList.add(new Quote(q.getId(), q.getAuthor(), q.getQuote()));
         }
         return quoteList;
     }
+
+    public Quote findbyid(int i) {
+
+        Optional<Quote> quoteOptional = repository.findById(i);
+        return quoteOptional.orElse(null);
+    }
+
+
 }
