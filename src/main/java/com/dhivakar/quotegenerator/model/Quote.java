@@ -1,4 +1,4 @@
-package com.dhivakar.QuoteGenerator.model;
+package com.dhivakar.quotegenerator.model;
 
 import lombok.Data;
 

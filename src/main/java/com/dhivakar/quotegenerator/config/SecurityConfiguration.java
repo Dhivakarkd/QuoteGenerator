@@ -1,4 +1,4 @@
-package com.dhivakar.QuoteGenerator.config;
+package com.dhivakar.quotegenerator.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

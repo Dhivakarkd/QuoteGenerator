@@ -1,4 +1,4 @@
-package com.dhivakar.QuoteGenerator.config;
+package com.dhivakar.quotegenerator.config;
 
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ public class DataSourceConfiguration {
 
     @Bean
     public DataSource getDatasource() {
-        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
         dataSourceBuilder.password(password);
