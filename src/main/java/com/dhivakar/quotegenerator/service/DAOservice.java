@@ -1,7 +1,7 @@
-package com.dhivakar.QuoteGenerator.service;
+package com.dhivakar.quotegenerator.service;
 
-import com.dhivakar.QuoteGenerator.model.Quote;
-import com.dhivakar.QuoteGenerator.repository.QuoteRepository;
+import com.dhivakar.quotegenerator.model.Quote;
+import com.dhivakar.quotegenerator.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

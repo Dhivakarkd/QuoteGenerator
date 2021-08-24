@@ -1,4 +1,4 @@
-package com.dhivakar.QuoteGenerator;
+package com.dhivakar.quotegenerator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
