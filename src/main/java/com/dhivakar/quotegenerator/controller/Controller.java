@@ -18,7 +18,7 @@ public class Controller {
 
     @RequestMapping(value = "/")
     public Quote init() {
-        //TODO:Enale more Exception Feature
+        //TODO:Enable more Exception Feature
         return getrandomquote();
     }
 
