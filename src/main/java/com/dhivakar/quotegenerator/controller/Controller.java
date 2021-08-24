@@ -28,6 +28,7 @@ public class Controller {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Quote> getquote() {
 
+
         return service.findall();
     }
 
