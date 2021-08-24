@@ -6,30 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Random;
 
 @RestController
 public class Controller {
 
-
     @Autowired
     DAOservice service;
 
     @RequestMapping(value = "/")
-    public String init() {
-        return "hello world";
-    }
-
-    @RequestMapping(value = "/get", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Quote> getquote() {
-
-
-        return service.findall();
+    public Quote init() {
+        //TODO:Enale more Exception Feature
+        return getrandomquote();
     }
 
     @GetMapping(value = "/randomQuote",
@@ -39,5 +29,7 @@ public class Controller {
 
         return service.findbyid(random.nextInt(5000));
     }
+
+    //TODO:Add Another API Mapping to handle insert feature
 
 }
