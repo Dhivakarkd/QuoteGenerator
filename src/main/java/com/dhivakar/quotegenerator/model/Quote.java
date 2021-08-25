@@ -1,12 +1,18 @@
 package com.dhivakar.quotegenerator.model;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Quote")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Quote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,17 +20,7 @@ public class Quote {
     private String author;
     private String quote;
 
-    public Quote() {
-
-    }
-
     public Quote(String author, String quote) {
-        this.author = author;
-        this.quote = quote;
-    }
-
-    public Quote(int id, String author, String quote) {
-        this.id = id;
         this.author = author;
         this.quote = quote;
     }
