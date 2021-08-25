@@ -14,5 +14,8 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
       - name: Build with Maven
+        env:
+          SECURITY_USER : root
+          SECURITY_PASSWORD : root123
         run: mvn clean install
 
