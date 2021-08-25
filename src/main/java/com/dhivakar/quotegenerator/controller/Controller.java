@@ -3,6 +3,7 @@ package com.dhivakar.quotegenerator.controller;
 import com.dhivakar.quotegenerator.model.Quote;
 import com.dhivakar.quotegenerator.service.DAOservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,12 @@ import java.util.Random;
 
 @RestController
 public class Controller {
+
+    private static final String DEV_PROFILE ="dev";
+
+
+    @Value("$spring.profiles.active")
+    private String profile;
 
     @Autowired
     DAOservice service;
@@ -26,8 +33,11 @@ public class Controller {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Quote getrandomquote() {
         Random random = new Random();
-
-        return service.findbyid(random.nextInt(5000));
+        if(profile.equalsIgnoreCase(DEV_PROFILE)) {
+            return service.findbyid(random.nextInt(3));
+        }else{
+            return service.findbyid(random.nextInt(5000));
+        }
     }
 
     //TODO:Add Another API Mapping to handle insert feature
