@@ -1,3 +1,4 @@
+![Build](https://img.shields.io/github/workflow/status/Dhivakarkd/QuoteGenerator/Build)
 # QuoteGenerator
 
 A project which provides a restful endpoint for Motivational Quotes  
