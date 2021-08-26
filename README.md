@@ -1,12 +1,13 @@
+![Build](https://img.shields.io/github/workflow/status/Dhivakarkd/QuoteGenerator/Build)
 # QuoteGenerator
 
 A project which provides a restful endpoint for Motivational Quotes  
 
-## Run Project with `DEV` Config
+#### Run Project with `DEV` Config  
 
     ./mvnw spring-boot:run
 
-## Run Project with `PROD` Config**
+#### Run Project with `PROD` Config  
 
     ./mvnw spring-boot:run -P prod
 
