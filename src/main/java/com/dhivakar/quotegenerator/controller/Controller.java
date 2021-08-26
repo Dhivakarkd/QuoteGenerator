@@ -17,10 +17,7 @@ import java.util.Random;
 public class Controller {
 
     private static final String DEV_PROFILE ="dev";
-   private final Random random = new Random();
-
-
-
+    private final Random random = new Random();
 
     @Value("${spring.profiles.active}")
     private String profile;
