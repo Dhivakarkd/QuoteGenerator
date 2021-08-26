@@ -2,6 +2,7 @@ package com.dhivakar.quotegenerator.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -19,9 +20,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web)  {
-        web
-                .ignoring()
-                .antMatchers("/h2-console/**");
+    protected void configure(HttpSecurity http) throws Exception {
+        //Disable default CSRF Protection
+        http.csrf()
+                .disable();
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/", "/randomQuote", "/h2-console/**");
     }
 }

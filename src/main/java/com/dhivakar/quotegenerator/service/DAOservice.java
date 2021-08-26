@@ -1,6 +1,6 @@
 package com.dhivakar.quotegenerator.service;
 
-import com.dhivakar.quotegenerator.model.Quote;
+import com.dhivakar.quotegenerator.model.QuoteDO;
 import com.dhivakar.quotegenerator.repository.QuoteRepository;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -16,23 +16,30 @@ public class DAOservice {
     @Autowired
     QuoteRepository repository;
 
-    public Quote findbyid(int i) {
+    /**
+     * @param id ID of Quote to be fetched
+     * @return {@link QuoteDO} for the provided ID
+     */
+    public QuoteDO findbyid(int id) {
 
-        Optional<Quote> quoteOptional = repository.findById(i);
+        Optional<QuoteDO> quoteOptional = repository.findById(id);
         return quoteOptional.orElse(null);
     }
 
-    public boolean insertQuote(@NonNull Quote quote) {
+    /**
+     * @param quoteDO Quote to be Inserted
+     * @return {@literal true} when inserted ,{@literal false} otherwise.
+     */
+    public boolean insertQuote(@NonNull QuoteDO quoteDO) {
 
         try {
-            Quote updatedQuote = repository.save(quote);
-            log.info("Quote Inserted with ID : {}", updatedQuote.getId());
+            QuoteDO updatedQuoteDO = repository.save(quoteDO);
+            log.info("Quote Inserted with ID : {}", updatedQuoteDO.getId());
             return true;
         } catch (Exception e) {
             log.error("Exception during Database Operation due to {}", e.getMessage());
             return false;
         }
     }
-
 
 }
