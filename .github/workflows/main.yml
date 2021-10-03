@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - '!master'   # excludes master
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   build:

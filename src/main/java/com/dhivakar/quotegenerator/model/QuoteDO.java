@@ -13,14 +13,14 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Quote {
+public class QuoteDO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String author;
     private String quote;
 
-    public Quote(String author, String quote) {
+    public QuoteDO(String author, String quote) {
         this.author = author;
         this.quote = quote;
     }
