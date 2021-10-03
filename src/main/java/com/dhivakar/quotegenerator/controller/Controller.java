@@ -48,7 +48,7 @@ public class Controller {
         } else {
             quoteDO = service.findbyid(random.nextInt(5000));
             if (quoteDO != null) {
-                ResponseEntity.ok(quoteDO);
+                return ResponseEntity.ok(quoteDO);
             }
         }
         //TODO: Handle me with appropriate error page
