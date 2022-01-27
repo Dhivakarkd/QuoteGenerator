@@ -21,9 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Disable default CSRF Protection
-        http.csrf()
-                .disable();
+        //Disable default CSRF And CORS Protection
+        http.csrf().disable().cors().disable();
     }
 
     @Override
