@@ -1,6 +1,7 @@
 package com.dhivakar.quotegenerator.controller;
 
 import com.dhivakar.quotegenerator.model.QuoteDO;
+import com.dhivakar.quotegenerator.model.QuotePatch;
 import com.dhivakar.quotegenerator.model.QuoteVO;
 import com.dhivakar.quotegenerator.service.DAOservice;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
 
@@ -23,49 +21,119 @@ public class Controller {
     private static final String DEV_PROFILE = "dev";
     private final Random random = new Random();
     @Autowired
-    DAOservice service;
+    DAOservice daoservice;
     @Value("${spring.profiles.active}")
     private String profile;
 
-    @GetMapping(value = "/",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<QuoteDO> init() {
-        //TODO:Enable more Exception Feature
-        log.info("Generating Quote with profile :{}", profile);
-        return getrandomquote();
-    }
 
-    @GetMapping(value = "/randomQuote",
+    @GetMapping(value = "/quote/randomQuote",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<QuoteDO> getrandomquote() {
+    public ResponseEntity<QuoteVO> getrandomquote() {
         QuoteDO quoteDO;
         if (profile.equalsIgnoreCase(DEV_PROFILE)) {
 
-            quoteDO = service.findbyid(random.nextInt(8));
+            quoteDO = daoservice.findbyid(random.nextInt(8));
             if (quoteDO != null) {
-                return ResponseEntity.ok(quoteDO);
+
+                QuoteVO quoteVO = QuoteVO.builder()
+                        .quote(quoteDO.getQuote())
+                        .author(quoteDO.getAuthor())
+                        .build();
+                return ResponseEntity.ok(quoteVO);
             }
         } else {
-            quoteDO = service.findbyid(random.nextInt(5000));
+            quoteDO = daoservice.findbyid(random.nextInt(5000));
             if (quoteDO != null) {
-                return ResponseEntity.ok(quoteDO);
+
+                QuoteVO quoteVO = QuoteVO.builder()
+                        .quote(quoteDO.getQuote())
+                        .author(quoteDO.getAuthor())
+                        .build();
+                return ResponseEntity.ok(quoteVO);
             }
         }
-        //TODO: Handle me with appropriate error page
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new QuoteDO("Not Found", "Not Found"));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(QuoteVO.builder().quote("Not Found").author("Not Found").build());
     }
 
-    @PostMapping(value = "/insert")
+
+    @PostMapping(value = "/quote")
     public ResponseEntity<String> insertQuote(@RequestBody QuoteVO quoteVO) {
         log.info("insert method called");
         QuoteDO quoteDO = new QuoteDO(quoteVO.getAuthor(), quoteVO.getQuote());
-        boolean status = service.insertQuote(quoteDO);
+        boolean status = daoservice.insertQuote(quoteDO);
 
         if (status) {
             return ResponseEntity.accepted().body("Insertion Successful");
         } else {
             return ResponseEntity.unprocessableEntity().body("Insertion Failed");
         }
+    }
+
+    @PatchMapping(value = "/quote")
+    public ResponseEntity<String> updateQuote(@RequestBody QuotePatch quotePatch) {
+
+
+        boolean doesUpdateRequired= false;
+
+        log.info("Trying to Update Quote for id : {}", quotePatch.getId());
+
+        QuoteDO optionalQuote = daoservice.findbyid(quotePatch.getId());
+
+
+        if (optionalQuote != null) {
+
+            if (quotePatch.getQuote() != null) {
+                optionalQuote.setQuote(quotePatch.getQuote());
+                doesUpdateRequired = true;
+            }
+            if (quotePatch.getAuthor() != null) {
+                optionalQuote.setAuthor(quotePatch.getAuthor());
+                doesUpdateRequired = true;
+            }
+
+            if(doesUpdateRequired) {
+                boolean status = daoservice.updateQuote(optionalQuote);
+
+                if (status) {
+                    String updateText = "Quote/Author Updated for Id : " + quotePatch.getId() + " in Database";
+
+                    log.info(updateText);
+
+                    return ResponseEntity.accepted().body(updateText);
+                } else {
+
+                    return ResponseEntity.unprocessableEntity().body("Error Occurred at our Side Please try with other ID");
+                }
+            }else{
+
+                return ResponseEntity.unprocessableEntity().body("No Further Input Provided to Update Entity , Skipping Update");
+            }
+        } else {
+
+            String errorText = "No Quote found for Id : " + quotePatch.getId() + " in Database";
+            log.info(errorText);
+            return ResponseEntity.unprocessableEntity().body(errorText);
+        }
+
+    }
+
+    @DeleteMapping("/quote")
+    public ResponseEntity<String> deleteQuoteById(@RequestParam int id) {
+
+        boolean status = daoservice.deleteQuote(id);
+
+        if (status) {
+
+            String info = "Deletion of Quote with ID : " + id + " Successful";
+            return ResponseEntity.ok().body(info);
+
+        } else {
+
+            String info = "Deletion of Quote with ID : " + id + " UnSuccessful";
+            return ResponseEntity.unprocessableEntity().body(info);
+        }
+
     }
 
 }
