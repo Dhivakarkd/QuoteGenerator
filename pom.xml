@@ -135,7 +135,7 @@
                                         <limit>
                                             <counter>LINE</counter>
 <!--                        TODO:Increase Coverage to 80% when Tests are created-->
-                                            <minimum>25%</minimum>
+                                            <minimum>5%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
