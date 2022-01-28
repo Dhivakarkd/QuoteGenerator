@@ -5,6 +5,7 @@ import com.dhivakar.quotegenerator.model.QuotePatch;
 import com.dhivakar.quotegenerator.model.QuoteVO;
 import com.dhivakar.quotegenerator.service.DAOservice;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -32,13 +33,16 @@ public class Controller {
         QuoteDO quoteDO;
         if (profile.equalsIgnoreCase(DEV_PROFILE)) {
 
-            quoteDO = daoservice.findbyid(random.nextInt(8));
+            quoteDO = daoservice.findbyid(random.nextInt(12));
             if (quoteDO != null) {
 
                 QuoteVO quoteVO = QuoteVO.builder()
                         .quote(quoteDO.getQuote())
                         .author(quoteDO.getAuthor())
                         .build();
+
+                quoteVO = validateQuote(quoteVO);
+
                 return ResponseEntity.ok(quoteVO);
             }
         } else {
@@ -54,6 +58,16 @@ public class Controller {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(QuoteVO.builder().quote("Not Found").author("Not Found").build());
+    }
+
+    private QuoteVO validateQuote(QuoteVO quoteVO) {
+
+        if(StringUtils.isAllEmpty(quoteVO.getAuthor()) || StringUtils.isAllBlank(quoteVO.getAuthor())){
+            quoteVO.setAuthor("Unknown");
+        }
+
+        return quoteVO;
+
     }
 
 

@@ -6,4 +6,7 @@ insert into Quote values (5,'Saul Bellow','You never have to change anything you
 insert into Quote values (6,'Henry David Thoreau','How vain it is to sit down to write when you have not stood up to live.');
 insert into Quote values (7,'Margaret Atwood','A word after a word after a word is power.');
 insert into Quote values (8,'Paulo Coelho','Tears are words that need to be written.');
+insert into Quote values (9,'','Tears are words that need to be written.');
+insert into Quote values (10,'      ','Tears are words that need to be written.');
+insert into Quote values (11,'   ','Tears are words that need to be written.');
 
