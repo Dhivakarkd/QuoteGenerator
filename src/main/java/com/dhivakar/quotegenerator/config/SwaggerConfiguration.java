@@ -28,7 +28,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Quote Generator",
+                "Quote Generator API",
                 "Rest Service which provides a restful endpoint for Motivational Quotes",
                 "v1",
                 "Terms of service",
