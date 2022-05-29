@@ -17,7 +17,7 @@ The REST API to the Quote Generator is described below.
 
 ### Request
 
-`GET /randomQuote/`
+`GET quote/randomQuote/`
 
     https://quotegenerator123.herokuapp.com/randomQuote/
 
