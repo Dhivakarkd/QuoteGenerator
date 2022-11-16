@@ -16,7 +16,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/",
             "/quote/randomQuote",
             "/h2-console/**",
-            "/v2/api-docs"
+            "/v2/api-docs",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/webjars/springfox-swagger-ui/**",
     };
     @Value("${api.user}")
     private String user;
