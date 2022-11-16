@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile(value = "prod")
+@Profile(value = "prod|test")
 public class DataSourceConfiguration {
 
     private final String url = System.getenv("DATASOURCE_URL");
