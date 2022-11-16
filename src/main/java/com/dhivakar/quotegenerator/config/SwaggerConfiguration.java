@@ -29,7 +29,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "Quote Generator API",
-                "Rest Service which provides a restful endpoint for Motivational Quotes",
+                "Quote Generator is an Rest Client built using the Spring Framework . It uses a list of motivational quotes found on the web to generate new random quotes every time it runs",
                 "v1",
                 "Terms of service",
                 new Contact("Dhivakar KD", "https://github.com/Dhivakarkd", "dhivainfo084@gmail.com"),
