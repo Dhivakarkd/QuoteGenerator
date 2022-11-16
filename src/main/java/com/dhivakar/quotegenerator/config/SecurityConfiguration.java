@@ -12,6 +12,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
+    public static final String[] AUTH_WHITLIST = {
+            "/",
+            "/quote/randomQuote",
+            "/h2-console/**",
+            "/v2/api-docs"
+    };
     @Value("${api.user}")
     private String user;
     @Value("${api.pass}")
@@ -29,9 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .cors().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
                 .authorizeRequests()
+                .antMatchers(AUTH_WHITLIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
@@ -39,9 +46,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers("/", "/quote/randomQuote", "/h2-console/**");
-    }
 }
