@@ -2,6 +2,7 @@ package com.dhivakar.quotegenerator.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -34,6 +35,11 @@ public class SwaggerConfiguration {
                 "Terms of service",
                 new Contact("Dhivakar KD", "https://github.com/Dhivakarkd", "dhivainfo084@gmail.com"),
                 "Unlicense License", "https://github.com/Dhivakarkd/QuoteGenerator/blob/master/LICENSE", Collections.emptyList());
+    }
+
+    @Bean
+    public InternalResourceViewResolver defaultViewResolver() {
+        return new InternalResourceViewResolver();
     }
 
 }
