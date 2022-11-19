@@ -29,6 +29,7 @@ public class DataSourceConfiguration {
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
         dataSourceBuilder.password(password);
+        dataSourceBuilder.driverClassName("org.postgresql.Driver");
         return dataSourceBuilder.build();
     }
 }
