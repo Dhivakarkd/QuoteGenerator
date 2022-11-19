@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     build: .
     ports:
-      - "9093:9093"
+      - "9093:8080"
     environment:
       - SECURITY_USER=${SECURITY_USER}
       - SECURITY_PASSWORD=${SECURITY_PASSWORD}
