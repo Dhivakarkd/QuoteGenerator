@@ -2,6 +2,7 @@ version: '2'
 services:
   backend:
     container_name: quotesRestAPI
+    image: quote_api
     restart: unless-stopped
     build: .
     ports:
@@ -10,3 +11,6 @@ services:
       - SECURITY_USER=${SECURITY_USER}
       - SECURITY_PASSWORD=${SECURITY_PASSWORD}
       - RUNTIME_ENV=test
+      - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}
+      - DATASOURCE_URL=jdbc:${QUOTE_DATASOURCE_URL}
+      - DATASOURCE_USERNAME=${DATASOURCE_USERNAME}
