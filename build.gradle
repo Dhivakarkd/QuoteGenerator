@@ -41,7 +41,7 @@ dependencies {
 }
 
 group = 'com.dhivakar'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.1'
 description = 'QuoteGenerator'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 

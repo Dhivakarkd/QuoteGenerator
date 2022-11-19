@@ -1,0 +1,12 @@
+version: '2'
+services:
+  backend:
+    container_name: quotesRestAPI
+    restart: unless-stopped
+    build: .
+    ports:
+      - "9093:9093"
+    environment:
+      - SECURITY_USER=${SECURITY_USER}
+      - SECURITY_PASSWORD=${SECURITY_PASSWORD}
+      - RUNTIME_ENV=test
