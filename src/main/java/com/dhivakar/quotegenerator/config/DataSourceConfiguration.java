@@ -1,5 +1,6 @@
 package com.dhivakar.quotegenerator.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile(value = "prod|test")
+@Slf4j
 public class DataSourceConfiguration {
 
     private final String url = System.getenv("DATASOURCE_URL");
@@ -17,6 +19,12 @@ public class DataSourceConfiguration {
 
     @Bean
     public DataSource getDatasource() {
+
+        log.info("Database URL is {}", url);
+        log.info("Database USER is {}", username);
+        log.info("Database password is {}", password);
+
+
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
