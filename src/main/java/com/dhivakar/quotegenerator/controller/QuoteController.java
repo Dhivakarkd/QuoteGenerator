@@ -4,6 +4,8 @@ import com.dhivakar.quotegenerator.model.QuoteDO;
 import com.dhivakar.quotegenerator.model.QuotePatch;
 import com.dhivakar.quotegenerator.model.QuoteVO;
 import com.dhivakar.quotegenerator.service.DAOservice;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,7 @@ public class QuoteController {
 
 
     @PostMapping(value = "/quote")
+    @Operation(security = @SecurityRequirement(name = "basicAuth"))
     public ResponseEntity<String> insertQuote(@RequestBody QuoteVO quoteVO) {
         log.info("insert method called");
         QuoteDO quoteDO = new QuoteDO(quoteVO.getAuthor(), quoteVO.getQuote());
@@ -85,6 +88,7 @@ public class QuoteController {
     }
 
     @PatchMapping(value = "/quote")
+    @Operation(security = @SecurityRequirement(name = "basicAuth"))
     public ResponseEntity<String> updateQuote(@RequestBody QuotePatch quotePatch) {
 
 
@@ -133,6 +137,7 @@ public class QuoteController {
     }
 
     @DeleteMapping("/quote")
+    @Operation(security = @SecurityRequirement(name = "basicAuth"))
     public ResponseEntity<String> deleteQuoteById(@RequestParam int id) {
 
         boolean status = daoservice.deleteQuote(id);
