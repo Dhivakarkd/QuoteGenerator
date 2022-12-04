@@ -44,7 +44,9 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().disable().and()
+        http.csrf().disable()
+                .headers().frameOptions().disable().and()
+                .cors().disable()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITLIST).permitAll()
                 .anyRequest().authenticated()
