@@ -37,7 +37,7 @@ public class SwaggerConfiguration {
     public GroupedOpenApi adminApi() {
         return GroupedOpenApi.builder()
                 .group("quote-admin")
-                .pathsToMatch("/quote/**")
+                .pathsToMatch("/quote/**","/image/**")
                 .build();
     }
 

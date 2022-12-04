@@ -11,10 +11,11 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class DAOservice {
+public class QuoteDAO {
 
     @Autowired
     QuoteRepository repository;
+
 
     /**
      * @param id ID of Quote to be fetched
@@ -43,7 +44,7 @@ public class DAOservice {
     }
 
 
-    public boolean updateQuote(@NonNull QuoteDO quoteDO){
+    public boolean updateQuote(@NonNull QuoteDO quoteDO) {
 
         try {
             QuoteDO updatedQuoteDO = repository.save(quoteDO);
@@ -56,7 +57,7 @@ public class DAOservice {
 
     }
 
-    public boolean deleteQuote(int quoteID){
+    public boolean deleteQuote(int quoteID) {
 
         try {
             repository.deleteById(quoteID);

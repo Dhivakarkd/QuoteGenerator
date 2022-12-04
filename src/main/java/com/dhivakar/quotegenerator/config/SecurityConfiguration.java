@@ -19,6 +19,7 @@ public class SecurityConfiguration {
 
     public static final String[] AUTH_WHITLIST = {
             "/",
+            "/image/**",
             "/quote/randomQuote",
             "/h2-console/**",
             "/v3/api-docs",
@@ -45,6 +46,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                .headers().frameOptions().disable().and()
                 .cors().disable()
                 .authorizeRequests()
                 .antMatchers(AUTH_WHITLIST).permitAll()

@@ -3,7 +3,7 @@ package com.dhivakar.quotegenerator.controller;
 import com.dhivakar.quotegenerator.model.QuoteDO;
 import com.dhivakar.quotegenerator.model.QuotePatch;
 import com.dhivakar.quotegenerator.model.QuoteVO;
-import com.dhivakar.quotegenerator.service.DAOservice;
+import com.dhivakar.quotegenerator.service.QuoteDAO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class QuoteController {
     private static final String DEV_PROFILE = "dev";
     private final Random random = new Random();
     @Autowired
-    DAOservice daoservice;
+    QuoteDAO daoservice;
     @Value("${spring.profiles.active}")
     private String profile;
 
