@@ -1,6 +1,7 @@
 version: '2'
 services:
   backend:
+    user: 1000:1000
     container_name: quotesRestAPI
     image: quote_api
     mem_limit: 200m
