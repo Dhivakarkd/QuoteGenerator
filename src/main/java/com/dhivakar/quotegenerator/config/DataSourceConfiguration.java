@@ -20,11 +20,6 @@ public class DataSourceConfiguration {
     @Bean
     public DataSource getDatasource() {
 
-        log.info("Database URL is {}", url);
-        log.info("Database USER is {}", username);
-        log.info("Database password is {}", password);
-
-
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(url);
         dataSourceBuilder.username(username);
