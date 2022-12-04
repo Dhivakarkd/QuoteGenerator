@@ -2,10 +2,13 @@ package com.dhivakar.quotegenerator.service;
 
 import com.dhivakar.quotegenerator.model.ImageDO;
 import com.dhivakar.quotegenerator.repository.ImageRepository;
+import jdk.nashorn.internal.runtime.options.Option;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -41,4 +44,10 @@ public class ImageDAO {
 
         log.info("Saved Image Meta-Data to DB");
     }
+
+    public Optional<ImageDO> getImageByID(int id) {
+        return imageRepository.findById(id);
+    }
+
+
 }

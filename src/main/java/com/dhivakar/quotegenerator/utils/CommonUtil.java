@@ -1,5 +1,6 @@
 package com.dhivakar.quotegenerator.utils;
 
+import com.dhivakar.quotegenerator.model.ImageVO;
 import lombok.extern.slf4j.Slf4j;
 import org.asynchttpclient.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,26 +24,14 @@ public class CommonUtil {
     @Value("${image.base.filepath}")
     private String imagePath;
 
-/*    public String downloadImage(String url) throws IOException {
+    //TODO : Make a Init loader to dynamically update range
+    private static final int RAND_RANGE = 10;
 
-        String fileName = generateFileName();
-
-        URLConnection connection = new URL(url).openConnection();
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-
-        connection.connect();
-        //TODO : Make a check for url
-        try (InputStream in = connection.getInputStream()) {
-
-            Files.copy(in, Paths.get(imagePath+fileName));
-
-        }
-        log.info("Image : {} downloaded", fileName);
-
-        return fileName;
-    }*/
+    private SecureRandom random = new SecureRandom();
 
     public String downloadImage(String url) throws FileNotFoundException {
+
+        //TODO : Make a check for url
 
         String fileName = generateFileName().trim();
 
@@ -71,6 +64,21 @@ public class CommonUtil {
     private String generateFileName() {
 
         return IMAGE_PREFIX + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) + EXTENSION;
+    }
+
+    public ImageVO getFileArray(String fileName) throws IOException {
+
+        return ImageVO.builder()
+                .fileContent(Files.readAllBytes(Paths.get(imagePath + fileName)))
+                .fileName(fileName)
+                .build();
+    }
+
+    public int getRandom() {
+
+        return random.nextInt(RAND_RANGE);
+
+
     }
 
 }

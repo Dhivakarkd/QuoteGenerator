@@ -4,8 +4,8 @@ services:
     user: 1000:1000
     container_name: quotesRestAPI
     image: quote_api
-    mem_limit: 200m
-    mem_reservation: 150M
+    mem_limit: 350m
+    mem_reservation: 250M
     restart: unless-stopped
     build: .
     ports:
