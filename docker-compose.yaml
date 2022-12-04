@@ -11,7 +11,7 @@ services:
     ports:
       - "9093:9093"
     volumes:
-      - /home/shared/quotes:/var/quotes/
+      - /home/media/quotes:/var/quotes/
     environment:
       - JAVA_OPTS=-Xmx180m
       - SECURITY_USER=${SECURITY_USER}
