@@ -9,11 +9,13 @@ services:
     build: .
     ports:
       - "9093:9093"
+    volumes:
+      - /home/shared/quotes:/var/quotes/
     environment:
       - JAVA_OPTS=-Xmx180m
       - SECURITY_USER=${SECURITY_USER}
       - SECURITY_PASSWORD=${SECURITY_PASSWORD}
-      - RUNTIME_ENV=test
+      - RUNTIME_ENV=prod
       - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD}
       - DATASOURCE_URL=${QUOTE_DATASOURCE_URL}
       - DATASOURCE_USERNAME=${DATASOURCE_USERNAME}
