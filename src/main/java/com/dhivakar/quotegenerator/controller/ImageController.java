@@ -38,7 +38,7 @@ public class ImageController {
     public ResponseEntity<ImageVO> getController() throws IOException {
 
 
-        Optional<ImageDO> image = imageDAO.getImageByID(1);
+        Optional<ImageDO> image = imageDAO.getImageByID(util.getRandom());
 
         if (image.isPresent()) {
             return ResponseEntity.ok(util.getFileArray(image.get().getFileName()));
