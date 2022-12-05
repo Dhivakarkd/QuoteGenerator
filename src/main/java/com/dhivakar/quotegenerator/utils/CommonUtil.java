@@ -25,7 +25,7 @@ public class CommonUtil {
     private String imagePath;
 
     //TODO : Make a Init loader to dynamically update range
-    private static final int RAND_RANGE = 10;
+    private static final int RAND_RANGE = 51;
 
     private SecureRandom random = new SecureRandom();
 
