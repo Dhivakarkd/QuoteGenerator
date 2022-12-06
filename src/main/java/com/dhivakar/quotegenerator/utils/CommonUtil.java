@@ -14,20 +14,25 @@ import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 
 @Slf4j
 @Service
 public class CommonUtil {
 
+    public static final String RECORD_COUNT = "RecordCount";
+
     private static final String IMAGE_PREFIX = "QT_IMAGE_";
-    private static String EXTENSION = ".jpg";
+    private static final LinkedHashMap<String, Integer> globalHashMap = new LinkedHashMap<>();
+
+    private static final String EXTENSION = ".jpg";
     @Value("${image.base.filepath}")
-    private String imagePath;
+    private String IMAGE_PATH;
+    private final SecureRandom random = new SecureRandom();
 
-    //TODO : Make a Init loader to dynamically update range
-    private static final int RAND_RANGE = 51;
-
-    private SecureRandom random = new SecureRandom();
+    public void addValueToGlobalHash(String key, int value) {
+        globalHashMap.put(key, value);
+    }
 
     public String downloadImage(String url) throws FileNotFoundException {
 
@@ -37,7 +42,7 @@ public class CommonUtil {
 
         AsyncHttpClient client = Dsl.asyncHttpClient();
 
-        FileOutputStream stream = new FileOutputStream(imagePath + fileName);
+        FileOutputStream stream = new FileOutputStream(IMAGE_PATH + fileName);
 
         client.prepareGet(url)
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11")
@@ -60,7 +65,6 @@ public class CommonUtil {
         return fileName;
     }
 
-
     private String generateFileName() {
 
         return IMAGE_PREFIX + LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) + EXTENSION;
@@ -69,15 +73,14 @@ public class CommonUtil {
     public ImageVO getFileArray(String fileName) throws IOException {
 
         return ImageVO.builder()
-                .fileContent(Files.readAllBytes(Paths.get(imagePath + fileName)))
+                .fileContent(Files.readAllBytes(Paths.get(IMAGE_PATH + fileName)))
                 .fileName(fileName)
                 .build();
     }
 
     public int getRandom() {
 
-        return random.nextInt(RAND_RANGE);
-
+        return random.nextInt(globalHashMap.get(RECORD_COUNT));
 
     }
 

@@ -2,12 +2,14 @@ package com.dhivakar.quotegenerator.service;
 
 import com.dhivakar.quotegenerator.model.ImageDO;
 import com.dhivakar.quotegenerator.repository.ImageRepository;
-import jdk.nashorn.internal.runtime.options.Option;
+import com.dhivakar.quotegenerator.utils.CommonUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @Service
@@ -16,6 +18,19 @@ public class ImageDAO {
 
     @Autowired
     ImageRepository imageRepository;
+
+    @Autowired
+    CommonUtil commonUtil;
+
+    @Getter
+    private int count = 0;
+
+    @PostConstruct
+    public void initLoad() {
+        count = (int) imageRepository.count();
+        log.info("Init Load : {} Images found in DB", count);
+        commonUtil.addValueToGlobalHash(CommonUtil.RECORD_COUNT, count);
+    }
 
 
     public void insertImageMETAToTable(MultipartFile file) {
@@ -46,6 +61,9 @@ public class ImageDAO {
     }
 
     public Optional<ImageDO> getImageByID(int id) {
+
+        log.info("Fetching DB for id : {}", id);
+
         return imageRepository.findById(id);
     }
 
