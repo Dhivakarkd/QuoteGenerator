@@ -12,8 +12,7 @@ class CommonUtilTest {
 
         CommonUtil util = new CommonUtil();
 
-        String urlString = "http://MVSXX.COMPANY.COM:44455/CICSPLEXSM//TOXTETH/VIEW/EYUSTARTPROGRAM.TABULAR\n" +
-                "       ?FILTERC=1";
+        String urlString = "https://i.pinimg.com/564x/3d/7e/54/3d7e544b68f75c14493d9d24ef429d81.jpg";
         assertTrue(util.isValidURL(urlString));
     }
 
