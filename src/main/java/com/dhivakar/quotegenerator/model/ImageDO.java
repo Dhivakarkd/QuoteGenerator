@@ -25,6 +25,8 @@ public class ImageDO {
     @UpdateTimestamp
     @Column(name = "createdtime")
     private LocalDateTime createTimeStamp;
+    @Column(name = "url", unique = true)
+    private String imageUrl;
 
 
 }

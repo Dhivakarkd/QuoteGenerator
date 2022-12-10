@@ -50,6 +50,16 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+test {
+    useJUnitPlatform()
+
+    maxHeapSize = '1G'
+
+    testLogging {
+        events "passed"
+    }
+}
+
 jar {
     //To disable generation of plain jar
     enabled = false

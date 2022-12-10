@@ -15,6 +15,8 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -26,9 +28,12 @@ public class CommonUtil {
     private static final LinkedHashMap<String, Integer> globalHashMap = new LinkedHashMap<>();
 
     private static final String EXTENSION = ".jpg";
+
+    // Regular expression to match URLs
+    private static final String URL_REGEX = "^(https?://)?(www\\.)?([a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,}(/.*)?$";
+    private final SecureRandom random = new SecureRandom();
     @Value("${image.base.filepath}")
     private String IMAGE_PATH;
-    private final SecureRandom random = new SecureRandom();
 
     public void addValueToGlobalHash(String key, int value) {
         globalHashMap.put(key, value);
@@ -77,6 +82,18 @@ public class CommonUtil {
                 .fileName(fileName)
                 .build();
     }
+
+    public boolean isValidURL(String urlString) {
+        // Compile the regular expression
+        Pattern pattern = Pattern.compile(URL_REGEX);
+
+        // Match the given string against the regular expression
+        Matcher matcher = pattern.matcher(urlString);
+
+        // Return the result of the match
+        return matcher.matches();
+    }
+
 
     public int getRandom() {
 

@@ -17,10 +17,10 @@ import java.util.Optional;
 public class ImageDAO {
 
     @Autowired
-    ImageRepository imageRepository;
+    private ImageRepository imageRepository;
 
     @Autowired
-    CommonUtil commonUtil;
+    private CommonUtil commonUtil;
 
     @Getter
     private int count = 0;
@@ -47,11 +47,12 @@ public class ImageDAO {
         log.info("Saved Image Meta-Data to DB");
     }
 
-    public void insertDownloadedData(String fileName) {
+    public void insertDownloadedData(String fileName, String url) {
 
 
         ImageDO image = ImageDO.builder()
                 .fileName(fileName)
+                .imageUrl(url)
                 .build();
 
 

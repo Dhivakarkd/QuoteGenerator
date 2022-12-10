@@ -1,5 +1,6 @@
 package com.dhivakar.quotegenerator.controller;
 
+import com.dhivakar.quotegenerator.model.ErrorCode;
 import com.dhivakar.quotegenerator.model.ImageDO;
 import com.dhivakar.quotegenerator.model.ImageVO;
 import com.dhivakar.quotegenerator.service.ImageDAO;
@@ -62,11 +63,18 @@ public class ImageController {
     @PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> saveImage(@RequestParam("url") String url) throws IOException {
 
-        String fileName = util.downloadImage(url);
+        if (util.isValidURL(url)) {
 
-        imageDAO.insertDownloadedData(fileName);
+            String fileName = util.downloadImage(url);
 
-        return ResponseEntity.ok("Generated File : " + fileName);
+            imageDAO.insertDownloadedData(fileName, url);
+
+            return ResponseEntity.ok("Generated File : " + fileName);
+        } else {
+
+            return ResponseEntity.badRequest().body(ErrorCode.QT_GEN_API001.toString());
+
+        }
 
     }
 }
